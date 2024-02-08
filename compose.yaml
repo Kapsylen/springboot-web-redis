@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  docker-with-spring-profile:
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    #      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+    build: .
+    restart: always
+    ports:
+      - '8080:8080'
+    links:
+      - redis
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
